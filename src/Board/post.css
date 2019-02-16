@@ -1,8 +1,9 @@
 .Post {
     display: flex;
     background-color: #ffff33;
-    width:50vw;
-    height:4vw;
+    width:100%;
+    height:100%;
+    text-align: center;
 }
 .Post h1{
     font-size:20px;
@@ -32,6 +33,8 @@
     background-color: #999999;
     width:100%;
     height:70%;
+    text-align: left;
+    padding-left: 1vw;
 }
 .Post .Post_number{
     background-color: #159847;

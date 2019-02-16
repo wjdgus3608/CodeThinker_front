@@ -18,7 +18,11 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-
+import Collapse from '@material-ui/core/Collapse';
+import ExpandLess from '@material-ui/icons/ExpandLess';
+import ExpandMore from '@material-ui/icons/ExpandMore';
+import StarBorder from '@material-ui/icons/StarBorder';
+import Board from './board.js';
 const drawerWidth = 240;
 
 const styles = theme => ({
@@ -86,6 +90,7 @@ const styles = theme => ({
 class MiniDrawer extends React.Component {
     state = {
         open: false,
+        open2: false,
     };
 
     handleDrawerOpen = () => {
@@ -94,6 +99,9 @@ class MiniDrawer extends React.Component {
 
     handleDrawerClose = () => {
         this.setState({ open: false });
+    };
+    handleClick = () => {
+        this.setState(state => ({ open2: !state.open2 }));
     };
 
     render() {
@@ -120,7 +128,7 @@ class MiniDrawer extends React.Component {
                             <MenuIcon />
                         </IconButton>
                         <Typography variant="h6" color="inherit" noWrap>
-                            Mini variant drawer
+                            Code Thinkers
                         </Typography>
                     </Toolbar>
                 </AppBar>
@@ -145,16 +153,27 @@ class MiniDrawer extends React.Component {
                     </div>
                     <Divider />
                     <List>
-                        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                            <ListItem button key={text}>
-                                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                                <ListItemText primary={text} />
+                        <ListItem button onClick={this.handleClick}>
+                        <ListItemIcon>
+                            <i className="material-icons">message</i>
+                        </ListItemIcon>
+                        <ListItemText inset primary="Boards" />
+                        {this.state.open2 ? <ExpandLess /> : <ExpandMore />}
+                    </ListItem>
+                    <Collapse in={this.state.open2} timeout="auto" unmountOnExit>
+                        <List component="div" disablePadding>
+                            <ListItem button className={classes.nested}>
+                                <ListItemIcon>
+                                    <i className="material-icons">help</i>
+                                </ListItemIcon>
+                                <ListItemText inset primary="QnA Board" />
                             </ListItem>
-                        ))}
+                        </List>
+                    </Collapse>
                     </List>
-                    <Divider />
+                    <Divider/>
                     <List>
-                        {['All mail', 'Trash', 'Spam'].map((text, index) => (
+                        {['sample1', 'sample2'].map((text, index) => (
                             <ListItem button key={text}>
                                 <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
                                 <ListItemText primary={text} />
@@ -164,29 +183,9 @@ class MiniDrawer extends React.Component {
                 </Drawer>
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
+                    <Board board_name="QnA Board"/>
                     <Typography paragraph>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                        incididunt ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent
-                        elementum facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in
-                        hendrerit gravida rutrum quisque non tellus. Convallis convallis tellus id interdum
-                        velit laoreet id donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing.
-                        Amet nisl suscipit adipiscing bibendum est ultricies integer quis. Cursus euismod quis
-                        viverra nibh cras. Metus vulputate eu scelerisque felis imperdiet proin fermentum leo.
-                        Mauris commodo quis imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus
-                        at augue. At augue eget arcu dictum varius duis at consectetur lorem. Velit sed
-                        ullamcorper morbi tincidunt. Lorem donec massa sapien faucibus et molestie ac.
-                    </Typography>
-                    <Typography paragraph>
-                        Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper eget nulla
-                        facilisi etiam dignissim diam. Pulvinar elementum integer enim neque volutpat ac
-                        tincidunt. Ornare suspendisse sed nisi lacus sed viverra tellus. Purus sit amet volutpat
-                        consequat mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis risus
-                        sed vulputate odio. Morbi tincidunt ornare massa eget egestas purus viverra accumsan in.
-                        In hendrerit gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem
-                        et tortor. Habitant morbi tristique senectus et. Adipiscing elit duis tristique
-                        sollicitudin nibh sit. Ornare aenean euismod elementum nisi quis eleifend. Commodo
-                        viverra maecenas accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam
-                        ultrices sagittis orci a.
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempo
                     </Typography>
                 </main>
             </div>
