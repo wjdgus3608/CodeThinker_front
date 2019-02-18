@@ -9,6 +9,7 @@ function Board({match}) {
             <h1>{match.params.title}</h1>
             <List disablePadding={true} dense={true}/>
         </div>
+
     )
 }
 

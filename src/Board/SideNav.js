@@ -96,6 +96,40 @@ class MiniDrawer extends React.Component {
         open2: false,
     };
 
+    componentDidMount() {
+        this._getBoards()
+    }
+    _getBoards = async ()=>{
+        const boards = await this._callApi()
+        this.setState({
+            boards
+        })
+    }
+
+    _callApi=()=>{
+        return  fetch('http://localhost:3000/boards')
+            .then(potato => potato.json())
+            .then(json=>json)
+            .catch(err=>console.log(err))
+    }
+
+    _renderBoards=()=>{
+        const boards =this.state.boards.map(board=>{
+            console.log(board)
+            return /*<h1>{board.board_name}</h1>*/(
+                <NavLink exact to={'/boards/'+board.board_name}>
+                    <ListItem button>
+                        <ListItemIcon>
+                            <i className="material-icons">help</i>
+                        </ListItemIcon>
+                        <ListItemText inset primary={board.board_name} />
+                    </ListItem>
+                </NavLink>
+            )
+        })
+        return boards
+    }
+
     handleDrawerOpen = () => {
         this.setState({ open: true });
     };
@@ -107,9 +141,6 @@ class MiniDrawer extends React.Component {
         this.setState(state => ({ open2: !state.open2 }));
     };
 
-    my_function= () => {
-        this.setState(state => ({ open2: !state.open2 }));
-    };
 
     render() {
         const { classes, theme } = this.props;
@@ -169,14 +200,7 @@ class MiniDrawer extends React.Component {
                     </ListItem>
                     <Collapse in={this.state.open2} timeout="auto" unmountOnExit>
                         <List component="div" disablePadding>
-                            <NavLink exact to='/boards/QnA Board'>
-                                <ListItem button className={classes.nested}>
-                                    <ListItemIcon>
-                                        <i className="material-icons">help</i>
-                                    </ListItemIcon>
-                                    <ListItemText inset primary="QnA Board" />
-                                </ListItem>
-                            </NavLink>
+                            {this.state.boards ? this._renderBoards() : 'Loading...'}
                         </List>
                     </Collapse>
                     </List>
@@ -193,7 +217,6 @@ class MiniDrawer extends React.Component {
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
                     <Route exact path="/boards/:title" component={Board}/>
-                    {/*<Board board_name="QnA Board"/>*/}
                     <Typography paragraph>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempo
                     </Typography>
