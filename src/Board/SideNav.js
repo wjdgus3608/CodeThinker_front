@@ -22,7 +22,10 @@ import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
+import Link from 'react-router-dom';
 import Board from './board.js';
+import NavLink from "react-router-dom/es/NavLink";
+import {Route} from "react-router-dom";
 const drawerWidth = 240;
 
 const styles = theme => ({
@@ -104,6 +107,10 @@ class MiniDrawer extends React.Component {
         this.setState(state => ({ open2: !state.open2 }));
     };
 
+    my_function= () => {
+        this.setState(state => ({ open2: !state.open2 }));
+    };
+
     render() {
         const { classes, theme } = this.props;
 
@@ -162,12 +169,14 @@ class MiniDrawer extends React.Component {
                     </ListItem>
                     <Collapse in={this.state.open2} timeout="auto" unmountOnExit>
                         <List component="div" disablePadding>
-                            <ListItem button className={classes.nested}>
-                                <ListItemIcon>
-                                    <i className="material-icons">help</i>
-                                </ListItemIcon>
-                                <ListItemText inset primary="QnA Board" />
-                            </ListItem>
+                            <NavLink exact to='/boards/QnA Board'>
+                                <ListItem button className={classes.nested}>
+                                    <ListItemIcon>
+                                        <i className="material-icons">help</i>
+                                    </ListItemIcon>
+                                    <ListItemText inset primary="QnA Board" />
+                                </ListItem>
+                            </NavLink>
                         </List>
                     </Collapse>
                     </List>
@@ -183,7 +192,8 @@ class MiniDrawer extends React.Component {
                 </Drawer>
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
-                    <Board board_name="QnA Board"/>
+                    <Route exact path="/boards/:title" component={Board}/>
+                    {/*<Board board_name="QnA Board"/>*/}
                     <Typography paragraph>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempo
                     </Typography>
