@@ -94,6 +94,10 @@ class MiniDrawer extends React.Component {
     state = {
         open: false,
         open2: false,
+        selectedBoard: {
+            board_name: "",
+            board_id: 0,
+        }
     };
 
     componentDidMount() {
@@ -115,10 +119,9 @@ class MiniDrawer extends React.Component {
 
     _renderBoards=()=>{
         const boards =this.state.boards.map(board=>{
-            console.log(board)
-            return /*<h1>{board.board_name}</h1>*/(
-                <NavLink exact to={'/boards/'+board.board_name}>
-                    <ListItem button>
+            return (
+                <NavLink exact to={'/boards/'+board.board_id}>
+                    <ListItem button onClick={()=>{this.setState({selectedBoard: board})}}>
                         <ListItemIcon>
                             <i className="material-icons">help</i>
                         </ListItemIcon>
@@ -216,7 +219,7 @@ class MiniDrawer extends React.Component {
                 </Drawer>
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
-                    <Route exact path="/boards/:title" component={Board}/>
+                    <Route exact path="/boards/:board_id" render={()=> <Board board={this.state.selectedBoard}/>}/>
                     <Typography paragraph>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempo
                     </Typography>
