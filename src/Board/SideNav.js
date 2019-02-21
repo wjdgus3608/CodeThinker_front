@@ -21,8 +21,6 @@ import MailIcon from '@material-ui/icons/Mail';
 import Collapse from '@material-ui/core/Collapse';
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
-import StarBorder from '@material-ui/icons/StarBorder';
-import Link from 'react-router-dom';
 import Board from './board.js';
 import NavLink from "react-router-dom/es/NavLink";
 import {Route} from "react-router-dom";

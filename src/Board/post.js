@@ -1,5 +1,4 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import './post.css'
 function Post({title,tag,number,time,writer,up,down}) {
 	return(
@@ -34,44 +33,8 @@ function Post({title,tag,number,time,writer,up,down}) {
 			        </div>
                  </div>
 </div>
-
 		</div>
 
-	)
-}
-function Post_title({title}) {
-	return(
-		<span>{title}</span>
-	)
-}
-function Post_tag({tag}) {
-	return(
-		<span>{tag}</span>
-	)
-}
-function Post_number({number}) {
-	return(
-		<span>{number}</span>
-	)
-}
-function Post_time({time}) {
-	return(
-		<span>{time}</span>
-	)
-}
-function Post_writer({writer}) {
-	return(
-		<span>{writer}</span>
-	)
-}
-function Post_up({up}) {
-	return(
-		<span>{up}</span>
-	)
-}
-function Post_down({down}) {
-	return(
-		<span>{down}</span>
 	)
 }
 export default Post;
