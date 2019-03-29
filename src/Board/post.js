@@ -1,5 +1,7 @@
 import React from 'react';
 import './post.css'
+
+
 function Post({title,tag,number,time,writer,up,down}) {
 	return(
 		<div className="Post">
@@ -16,14 +18,15 @@ function Post({title,tag,number,time,writer,up,down}) {
                 </div>
                 </div>
 			</div>
-
             <div className="Right_column">
 			    <div className="Post_title">
-				    <b>{title}</b>
+				    <b> {title}</b>
 			    </div>
                  <div className="Under_row">
 			        <div className="Post_tag">
-				         <b>{tag}</b>
+						{/*<Avatars/>
+						<Buttons tag={tag} color={"primary"} size={"small"}/>*/}
+						{tag}
 			        </div>
 			        <div className="Post_time">
 				        <b>{time}</b>

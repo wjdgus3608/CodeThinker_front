@@ -6,10 +6,12 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
-import InboxIcon from '@material-ui/icons/Inbox';
+
 import DraftsIcon from '@material-ui/icons/Drafts';
 import Post from './post.js';
-import NavLink from "./SideNav";
+
+import NavLink from "react-router-dom/es/NavLink";
+
 const styles = theme => ({
     root: {
         width: '100%',
@@ -19,23 +21,27 @@ const styles = theme => ({
 
 });
 
-function ListItemLink(props) {
-    return <ListItem button component="a" {...props} />;
-}
-
+const state={
+    selectedPost: {
+        post_id: "",
+            post_title: "",
+    }
+};
 
 function SimpleList(props) {
+
     const { classes } = props;
-    console.log(props.posts);
     return (
         <div className={classes.root}>
             <List component="nav">
                 {props.posts.map((post)=> {
                         return (
-                            <ListItem button dense={true} disableGutters={true} padding={0}>
-                                <Post title={post.post_title} tag={post.post_tag} number="Number" time="time" writer={post.post_writer} up="Up" down="Down"
+                            <NavLink key={post._id} exact to={props.board.board_id+'/posts/'+post._id}>
+                            <ListItem button onClick={()=>{state.selectedPost=post}} dense={true} disableGutters={true} padding={0}>
+                                <Post title={post.post_title} tag={post.post_tag} number={post.post_id} time={post.post_time} writer={post.post_writer} up="Up" down="Down"
                                       />
                             </ListItem>
+                            </NavLink>
                         );
                     }
                 )}

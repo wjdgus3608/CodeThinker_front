@@ -30,11 +30,8 @@
     height:30%;
 }
 .Post .Post_title{
-    background-color: #999999;
     width:100%;
     height:70%;
-    text-align: left;
-    padding-left: 1vw;
 }
 .Post .Post_number{
     background-color: #159847;

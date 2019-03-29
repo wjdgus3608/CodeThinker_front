@@ -24,6 +24,8 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import Board from './board.js';
 import NavLink from "react-router-dom/es/NavLink";
 import {Route} from "react-router-dom";
+import PostIn from "./PostIn";
+import EditorConvertToHTML from "./writer.js"
 const drawerWidth = 240;
 
 const styles = theme => ({
@@ -118,7 +120,7 @@ class MiniDrawer extends React.Component {
     _renderBoards=()=>{
         const boards =this.state.boards.map(board=>{
             return (
-                <NavLink exact to={'/boards/'+board.board_id}>
+                <NavLink key={board.board_id} exact to={'/boards/'+board.board_id}>
                     <ListItem button onClick={()=>{this.setState({selectedBoard: board})}}>
                         <ListItemIcon>
                             <i className="material-icons">help</i>
@@ -218,6 +220,8 @@ class MiniDrawer extends React.Component {
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
                     <Route exact path="/boards/:board_id" render={()=> <Board board={this.state.selectedBoard}/>}/>
+                    <Route exact path="/boards/:board_id/posts/:post_id" render={()=> <PostIn url={window.location.pathname}/>}/>
+                    <Route exact path="/boards/:board_id/make" render={()=> <EditorConvertToHTML/>}/>
                     <Typography paragraph>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempo
                     </Typography>
